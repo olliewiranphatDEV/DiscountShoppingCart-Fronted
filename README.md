@@ -12,7 +12,7 @@ Password : test101
 A full-stack web application for a simple shopping cart system with user authentication, discount logic, and cart management.
 
 ---
-## 📦 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React.js (Vite)
@@ -57,3 +57,13 @@ A full-stack web application for a simple shopping cart system with user authent
 
 ### Protected Routes
 - Users must be signed in to access cart and checkout
+
+## Clone the repository
+create your directory + open Command Prompt (cmd) or VS Code
+```bash
+git clone https://github.com/olliewiranphatDEV/DiscountShoppingCart-Fronted .
+npm i
+npm run dev
+```
+
+## Thank for your time to review my project
