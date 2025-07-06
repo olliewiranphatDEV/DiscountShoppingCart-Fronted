@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useProductStore from '../stores/useProductStore'
-import ProductItemCard from '../components/products/productItemCard'
+import ProductItemCard from "../components/products/ProductItemCard"
 import SignupSigninForm from '../components/signup-signin-form/SignupSigninForm'
 import { AnimatePresence } from "framer-motion";
 import useAuthStore from '../stores/useAuthStore';
