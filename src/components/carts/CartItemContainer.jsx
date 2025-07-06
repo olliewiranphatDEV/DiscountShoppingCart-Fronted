@@ -11,10 +11,10 @@ function CartItemContainer({ cartItem, setIsLoading }) {
     console.log('userCarts >>', userCarts);
 
 
-    const product = ProductOnCart[0].product
-    const productID = product.productID
-    const unitPrice = parseFloat(product.price)
-    const currentQty = ProductOnCart[0].quantity;
+    const product = ProductOnCart[0]?.product
+    const productID = product?.productID
+    const unitPrice = parseFloat(product?.price)
+    const currentQty = ProductOnCart[0]?.quantity;
     const totalPrice = unitPrice * currentQty;
 
     const [isUpdating, setIsUpdating] = useState(false);
@@ -51,12 +51,12 @@ function CartItemContainer({ cartItem, setIsLoading }) {
         <div className="w-full md:w-[70%] bg-gray-300 rounded-lg flex flex-col md:flex-row items-center justify-between gap-4 p-4 hover:shadow-lg transition-all duration-300">
             {/* IMAGE */}
             <div className="h-[150px] w-[150px]">
-                <img src={product.imageUrl} alt="product-image" className="w-full h-full object-cover rounded-md" />
+                <img src={product?.imageUrl} alt="product-image" className="w-full h-full object-cover rounded-md" />
             </div>
 
             {/* NAME */}
             <div className="w-full md:w-[15%] text-center">
-                <span className="font-semibold text-[#FA374A] block truncate">{product.productName}</span>
+                <span className="font-semibold text-[#FA374A] block truncate">{product?.productName}</span>
             </div>
 
             {/* QUANTITY-COUNTER */}
