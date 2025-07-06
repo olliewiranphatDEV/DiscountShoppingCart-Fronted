@@ -12,6 +12,16 @@ export const getCartsByUserID = async (token) => {
     )
 }
 
+export const deleteCartIDByUserID = async (token, cartID) => {
+    return await axios.delete(`${BASE_URL}/cart/delete/${cartID}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    )
+}
+
 export const getAllDiscounts = async () => {
     return await axios(`${BASE_URL}/discount/all-discounts`)
 }

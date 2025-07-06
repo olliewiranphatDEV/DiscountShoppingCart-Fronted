@@ -11,6 +11,10 @@ function SignUpSubmit({ setLoading, setShowSignupSignin }) {
 
     const handleSignUp = async (value) => {
         setLoading(true)
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
         console.log(value);
         try {
             const res = await authSignUp(value)

@@ -5,7 +5,7 @@ import { postCheckoutOrderPayment } from '../../api-server/cart';
 import { useNavigate } from 'react-router';
 import useCartStore from '../../stores/useCartStore';
 
-function DiscountsSection({ discountsData, orderTotalPrice, userCarts }) {
+function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoading }) {
     const navigate = useNavigate()
     const { token, userData } = useAuthStore()
     const { resetCart } = useCartStore()
@@ -149,7 +149,6 @@ function DiscountsSection({ discountsData, orderTotalPrice, userCarts }) {
 
 
     const handleOrderToPayment = async () => {
-
         // VALIDATE ALL KEY DiscountsSelected
         const isAllDiscountsSelected = Object.values(selectedDiscounts).every(value => value !== '');
         if (!isAllDiscountsSelected) {
@@ -179,8 +178,14 @@ function DiscountsSection({ discountsData, orderTotalPrice, userCarts }) {
         }
 
         try {
+            setIsLoading(true)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
             const response = await postCheckoutOrderPayment(token, body)
             console.log('postCheckoutOrderPayment, response', response);
+            setIsLoading(false)
             await resetCart()
             navigate(`/user/order-summary/${response.data.results.orderID}`)
         } catch (error) {

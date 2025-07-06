@@ -8,6 +8,8 @@ Password : test101
 ---------------
 
 # Discount Shopping Cart
+## Live Demo 
+https://discount-shopping-cart-fronted.vercel.app
 
 A full-stack web application for a simple shopping cart system with user authentication, discount logic, and cart management.
 

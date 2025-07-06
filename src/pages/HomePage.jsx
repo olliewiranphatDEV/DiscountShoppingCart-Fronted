@@ -5,16 +5,25 @@ import SignupSigninForm from '../components/signup-signin-form/SignupSigninForm'
 import { AnimatePresence } from "framer-motion";
 import useAuthStore from '../stores/useAuthStore';
 import useCartStore from '../stores/useCartStore';
+import LoadingSkeleton from '../components/LoadingSkeleton';
 
 function HomePage() {
     const { showSignupSignin, setShowSignupSignin, token, userData } = useAuthStore()
     const { getProductData, productsData } = useProductStore()
     const { getUserCarts } = useCartStore()
+
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        getProductData()
-        if (token, userData) {
-            getUserCarts(token)
+        const fetchData = async () => {
+            setIsLoading(true)
+            await getProductData()
+            if (token && userData) {
+                await getUserCarts(token)
+            }
+            setIsLoading(false)
         }
+
+        fetchData()
     }, [token, userData])
 
     console.log('showSignupSignin >>', showSignupSignin);
@@ -22,10 +31,12 @@ function HomePage() {
 
 
     return (
-        <div className='min-h-screen px-8 pb-20 text-[#FA374A]'>
+        <div className='relative min-h-screen px-8 pb-20 text-[#FA374A]'>
             <h1 className="text-2xl font-semibold my-6">All Products</h1>
 
-            {productsData.length === 0 ? (
+            {isLoading ? (
+                <LoadingSkeleton />
+            ) : productsData.length === 0 ? (
                 <div className="flex justify-center items-center text-gray-700">
                     <span>No products found or loading failed.</span>
                 </div>
