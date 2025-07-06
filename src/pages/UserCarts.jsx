@@ -14,6 +14,12 @@ function UserCarts() {
     const [isLoading, setIsLoading] = useState(false)
     console.log('isLoading >>', isLoading);
 
+    const [selectedDiscounts, setSelectedDiscounts] = useState({
+        coupon: '',
+        onTop: '',
+        seasonal: ''
+    })
+
     useEffect(() => {
         const fetchData = async () => {
             if (!token) {
@@ -78,6 +84,7 @@ function UserCarts() {
                                     key={inx}
                                     cartItem={cartItem}
                                     setIsLoading={setIsLoading}
+                                    setSelectedDiscounts={setSelectedDiscounts}
                                 />
                             ))
                         )}
@@ -94,6 +101,8 @@ function UserCarts() {
                         orderTotalPrice={orderTotalPrice}
                         userCarts={userCarts}
                         setIsLoading={setIsLoading}
+                        setSelectedDiscounts={setSelectedDiscounts}
+                        selectedDiscounts={selectedDiscounts}
                     />
                 </div>)
             }

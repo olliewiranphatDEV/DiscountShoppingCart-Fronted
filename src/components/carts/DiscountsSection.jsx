@@ -5,7 +5,7 @@ import { postCheckoutOrderPayment } from '../../api-server/cart';
 import { useNavigate } from 'react-router';
 import useCartStore from '../../stores/useCartStore';
 
-function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoading }) {
+function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoading, setSelectedDiscounts, selectedDiscounts }) {
     const navigate = useNavigate()
     const { token, userData } = useAuthStore()
     const { resetCart, getUserCarts } = useCartStore()
@@ -29,11 +29,7 @@ function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoad
     const seasonalDiscounts = discountsData.filter(d => d.category === 'seasonal');
 
     // KEEP DATA - selectedDiscounts
-    const [selectedDiscounts, setSelectedDiscounts] = useState({
-        coupon: '',
-        onTop: '',
-        seasonal: ''
-    })
+
 
     const [priceAfterCoupon, setPriceAfterCoupon] = useState(0)
     const [priceAfterOnTop, setPriceAfterOnTop] = useState(0)
@@ -152,7 +148,7 @@ function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoad
         // VALIDATE ALL KEY DiscountsSelected
         const isAllDiscountsSelected = Object.values(selectedDiscounts).every(value => value !== '');
         if (!isAllDiscountsSelected) {
-            renderAlert("Please select every discount", "error");
+            renderAlert("Please select every discount again!", "error");
             return; // STOP PROCESS
         }
 

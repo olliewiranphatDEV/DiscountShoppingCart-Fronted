@@ -4,7 +4,7 @@ import useAuthStore from '../../stores/useAuthStore';
 import useCartStore from '../../stores/useCartStore';
 import { renderAlert } from '../../utils/renderAlert';
 
-function CartItemContainer({ cartItem, setIsLoading }) {
+function CartItemContainer({ cartItem, setIsLoading, setSelectedDiscounts }) {
     const { ProductOnCart, cartID } = cartItem
     const { token } = useAuthStore()
     const { getUserCarts, userCarts } = useCartStore()
@@ -27,6 +27,11 @@ function CartItemContainer({ cartItem, setIsLoading }) {
 
     const handleQuantityChange = async (newQty) => {
         if (newQty < 1 || isUpdating) return;
+        setSelectedDiscounts({
+            coupon: '',
+            onTop: '',
+            seasonal: ''
+        })
         try {
             setIsUpdating(true);
             await updateCartIDQuantity(token, cartID, productID, newQty);
