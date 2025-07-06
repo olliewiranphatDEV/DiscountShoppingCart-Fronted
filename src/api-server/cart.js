@@ -22,6 +22,16 @@ export const deleteCartIDByUserID = async (token, cartID) => {
     )
 }
 
+export const updateCartIDQuantity = async (token, cartID, productID, quantity) => {
+    return await axios.patch(`${BASE_URL}/cart/update-quantity`, {
+        cartID,
+        productID,
+        quantity
+    }, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+};
+
 export const getAllDiscounts = async () => {
     return await axios(`${BASE_URL}/discount/all-discounts`)
 }

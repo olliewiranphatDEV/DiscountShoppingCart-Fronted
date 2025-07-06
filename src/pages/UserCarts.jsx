@@ -72,10 +72,10 @@ function UserCarts() {
                         {userCarts.length === 0 ? (
                             <p className="text-center text-gray-500">No items in cart.</p>
                         ) : (
-                            userCarts.map((cartItem) => (
+                            userCarts.map((cartItem, inx) => (
                                 // Cart-Item
                                 <CartItemContainer
-                                    key={cartItem.cartID}
+                                    key={inx}
                                     cartItem={cartItem}
                                     setIsLoading={setIsLoading}
                                 />

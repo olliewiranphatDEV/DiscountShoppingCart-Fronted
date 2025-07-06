@@ -8,7 +8,7 @@ import useCartStore from '../../stores/useCartStore';
 function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoading }) {
     const navigate = useNavigate()
     const { token, userData } = useAuthStore()
-    const { resetCart } = useCartStore()
+    const { resetCart, getUserCarts } = useCartStore()
     // MAP TO SEPERATE CATEGORY - UI RENDER
     // console.log('discountsData >>', discountsData);
     // console.log('userCarts >>', userCarts);
@@ -172,6 +172,7 @@ function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoad
         console.log('discountsOrderData >>', discountsOrderData);
         console.log('orderFinalPrice >>', orderFinalPrice);
         const body = {
+            userCarts,
             productsOrderData,
             discountsOrderData,
             orderFinalPrice
@@ -185,8 +186,9 @@ function DiscountsSection({ discountsData, orderTotalPrice, userCarts, setIsLoad
             });
             const response = await postCheckoutOrderPayment(token, body)
             console.log('postCheckoutOrderPayment, response', response);
-            setIsLoading(false)
             await resetCart()
+
+            setIsLoading(false)
             navigate(`/user/order-summary/${response.data.results.orderID}`)
         } catch (error) {
             renderAlert("Cannot checkout to payment", "error")
